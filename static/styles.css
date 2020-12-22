@@ -1,14 +1,13 @@
 /* ELEMENT STYLES */
 body {
-    font-family: 'Quicksand', sans-serif;
+  font-family: Quicksand;
 }
 
-ul {
-    font-size: 5em;
+li {
+  font-size: 2em;
 }
 
 /* CLASS STYLES */
 .uncompleted {
-    color: red;
+  color: red;
 }
-
