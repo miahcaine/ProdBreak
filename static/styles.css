@@ -1,0 +1,14 @@
+/* ELEMENT STYLES */
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+ul {
+    font-size: 5em;
+}
+
+/* CLASS STYLES */
+.uncompleted {
+    color: red;
+}
+
