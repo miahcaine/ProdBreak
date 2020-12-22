@@ -11,22 +11,47 @@
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;700&display=swap" rel="stylesheet">
         
         <!-- OWN CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
         <link rel="stylesheet" href="static/styles.css">
 
         <title>ProdBreak</title>
         
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light">
+        <!-- TODO: BE ABLE TO CHANGE ACTIVE CLASS -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                &#x1F634 prodBreak
-                </a>
+                <a class="navbar-brand" href="/"> &#x1F634 prodBreak</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/tasks">tasks</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/profile">profile</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">disabled</a>
+                    </li>
+                </ul>
+                </div>
             </div>
         </nav>
         <div class="container">
+            {% with messages = get_flashed_messages(with_categories = true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class='alert alert-{{ category }}'>
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <!-- CONTENT BLOCK -- OTHER TEMPLATES OVERRIDE -->
-            {% block content %} {% endblock %}
+            {% block content %} {% endblock content %}
         </div>
 
         <!-- BOOTSTRAP JS -->

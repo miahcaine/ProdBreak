@@ -3,6 +3,9 @@ body {
   font-family: Quicksand;
 }
 
+h1 {
+  font-weight: bold;
+}
 li {
   font-size: 2em;
 }
@@ -10,4 +13,8 @@ li {
 /* CLASS STYLES */
 .uncompleted {
   color: red;
+}
+
+.submit-btn {
+    margin-top: 4vh;
 }
