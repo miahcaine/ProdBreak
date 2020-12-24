@@ -12,34 +12,52 @@
         
         <!-- OWN CSS -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-        <link rel="stylesheet" href="static/styles.css">
 
         <title>ProdBreak</title>
         
     </head>
     <body>
-        <!-- TODO: BE ABLE TO CHANGE ACTIVE CLASS -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/"> &#x1F634 prodBreak</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <nav class="navbar navbar-expand-md bg-light navbar-light">
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-expanded="false" aria-controls="collapsibleNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/tasks">tasks</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="/profile">profile</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">disabled</a>
-                    </li>
-                </ul>
+
+                <!-- Brand -->
+                <a class="navbar-brand" href="/"> &#x1F634 prodBreak</a>
+                
+                <!-- Navbar links -->
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">login.</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('task') }}">tasks.</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('profile') }}">profile.</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" aria-disabled="true">disabled.</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        <!-- TODO: BE ABLE TO CHANGE ACTIVE CLASS -->
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
+                    <a class="nav-item nav-link" aria-current="page" href="/tasks">tasks</a>
+                    <a class="nav-item nav-link" href="/profile">profile</a>
+                    <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">disabled</a>
                 </div>
             </div>
-        </nav>
+        </nav> -->
         <div class="container">
             {% with messages = get_flashed_messages(with_categories = true) %}
                 {% if messages %}
@@ -54,6 +72,8 @@
             {% block content %} {% endblock content %}
         </div>
 
+        <!-- jQUERY -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     </body>

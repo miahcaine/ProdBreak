@@ -31,6 +31,12 @@ def task():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        if form.username.data == 'admin' and form.password.data == 'abc':
+            flash('you have been logged in!', 'success')
+            return redirect(url_for('task'))
+        else:
+            flash('login unsuccessful. please check username and password', 'danger')
     return render_template("login.html", title="login.", form=form)
 
 

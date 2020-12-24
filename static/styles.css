@@ -1,18 +1,28 @@
-/* ELEMENT STYLES */
+/* GENERAL ELEMENT STYLES */
 body {
   font-family: Quicksand;
+  margin: 2%;
 }
 
 h1 {
   font-weight: bold;
 }
-li {
+/* li {
   font-size: 2em;
-}
+} */
+
 
 /* CLASS STYLES */
+li.nav-item {
+  font-size: 1.5em;
+}
 .uncompleted {
   color: red;
+}
+
+a.navbar-brand {
+  font-size: 3em;
+  font-weight: bold;
 }
 
 .submit-btn {
