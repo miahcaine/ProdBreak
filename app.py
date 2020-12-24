@@ -13,13 +13,13 @@ tasks = [
 ]
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         flash(f"account created for {form.username.data}!", "success")
-        return redirect(url_for("task"))  # POSTING DOESNT WORK :( ALWAYS A METHOD err
+        return redirect(url_for("task"))
     return render_template("register.html", title="register.", form=form)
 
 
