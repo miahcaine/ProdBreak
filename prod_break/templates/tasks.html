@@ -3,15 +3,28 @@
     <h1>your tasks: </h1>
     <div class="container">
         <ul>
-            {% for task in tasks %}
-                {% if task.complete %}
-                    <li class="task"> {{ task.task_name }} </li>
-                    <p> date Created: {{ task.date }} </p>
-                {% else %}
-                    <li class="task uncompleted"> {{ task.task_name }} </li>
-                    <p> date Created: {{ task.date }} </p>
-                {% endif %}
-            {% endfor %}
+            {% if tasks %}
+                {% for task in tasks %}
+                    {% if task.complete %}
+                        {% set complete_class = "completed" %}
+                    {% else %}
+                        {% set complete_class = "uncompleted" %}
+                    {% endif %}
+                    <li class="task {{ complete_class }}"> {{ task.task_name }} </li>
+                    <p> date Created: {{ task.date_created }} </p>
+                {% endfor %}
+            {% endif %}
         </ul>
+        <form method="POST" action="{{ url_for('add_task') }}">
+                <!-- <fieldset class="form-group"> -->
+                <div class="form-group">
+                    <input type="text" name="task-txt">
+                </div>
+                <!-- </fieldset> -->
+                <div class="form-group submit-btn">
+                    <input type="submit">
+                </div>
+            </form>
     </div>
+    
 {% endblock content %}

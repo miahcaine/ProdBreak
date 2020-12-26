@@ -29,35 +29,31 @@
                 <!-- Navbar links -->
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav">
+                        {% if current_user.is_authenticated %}
+                            {% set class_name = '' %}
+                            {% set disabled_bool = 'false' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('logout') }}">logout.</a>
+                            </li>
+                        {% else %}
+                            {% set class_name = 'disabled' %}
+                            {% set disabled_bool = 'true' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('register') }}">register.</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('login') }}">login.</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('login') }}">login.</a>
+                            <a class="nav-link {{ class_name }}" href="{{ url_for('task') }}" aria-disabled="{{ disabled_bool }}">tasks.</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('task') }}">tasks.</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('profile') }}">profile.</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" aria-disabled="true">disabled.</a>
+                            <a class="nav-link {{ class_name }}" href="{{ url_for('profile') }}" aria-disabled="{{ disabled_bool }}">your profile.</a>
                         </li>
                     </ul>
                 </div>
             </nav>
-        <!-- TODO: BE ABLE TO CHANGE ACTIVE CLASS -->
-        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
-                    <a class="nav-item nav-link" aria-current="page" href="/tasks">tasks</a>
-                    <a class="nav-item nav-link" href="/profile">profile</a>
-                    <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">disabled</a>
-                </div>
-            </div>
-        </nav> -->
         <div class="container">
             {% with messages = get_flashed_messages(with_categories = true) %}
                 {% if messages %}

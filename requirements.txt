@@ -3,3 +3,4 @@ flask-wtf
 wtforms[email]
 flask-sqlalchemy
 flask-bcrypt
+flask-login
