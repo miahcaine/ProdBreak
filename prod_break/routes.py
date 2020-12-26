@@ -1,14 +1,7 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from flask_sqlalchemy import SQLAlchemy
-
-from forms import RegistrationForm, LoginForm
-
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "7be87f5097974366dfe642c7f0c0b608"  # from built-in secrets module
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # database path
-
-db = SQLAlchemy(app)  # instance of SQLAlchemy database
-from models import User, Task
+from flask import render_template, url_for, flash, redirect
+from prod_break import app  # imports app from __init__.py
+from prod_break.forms import RegistrationForm, LoginForm
+from prod_break.models import User, Task
 
 tasks = [
     {"date": "12-21-2020", "task_name": "get groceries", "complete": False},
@@ -47,7 +40,3 @@ def login():
 @app.route("/profile")
 def profile():
     return render_template("profile.html")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)

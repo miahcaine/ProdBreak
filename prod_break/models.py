@@ -1,4 +1,4 @@
-from __main__ import db
+from prod_break import db  # imports db from __init__.py
 from datetime import datetime
 
 class User(db.Model):
