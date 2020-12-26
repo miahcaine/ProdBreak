@@ -14,6 +14,10 @@ h1 {
 
 /* CLASS STYLES */
 li.nav-item {
+  font-size: 2em;
+}
+
+li.task {
   font-size: 1.5em;
 }
 .uncompleted {
