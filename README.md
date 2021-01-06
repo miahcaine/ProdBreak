@@ -2,7 +2,7 @@
 
 ProdBreak is a Python Flask based productivity web application for task management and break reminders.
 
-## Installation
+## Requirements
 
 It is highly recommended to create a virtual environment to run this application in. Follow the instructions [here](https://docs.python.org/3/library/venv.html) to create one.
 
