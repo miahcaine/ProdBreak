@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):  # inherits from database model and session man
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task_name = db.Column(db.String(150), nullable=False)
-    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    due_date = db.Column(db.DateTime, default=None)
     complete = db.Column(db.Boolean, nullable=False, default=False)
     notes = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)

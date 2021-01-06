@@ -1,30 +1,46 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} 
 {% block content %}
-    <h1>your tasks: </h1>
-    <div class="container">
+<div class="container-fluid">
+    <h1>hi {{ current_user.username }}! here are your current tasks:</h1>    
+    <div class="d-flex justify-content-center">
         <ul>
-            {% if tasks %}
-                {% for task in tasks %}
-                    {% if task.complete %}
-                        {% set complete_class = "completed" %}
-                    {% else %}
-                        {% set complete_class = "uncompleted" %}
+            {% if tasks %} 
+                {% for task in tasks %} 
+                    {% if task.complete %} 
+                        {% set complete_class = "completed" %} 
+                    {% else %} 
+                        {% set complete_class = "uncompleted" %} 
                     {% endif %}
-                    <li class="task {{ complete_class }}"> {{ task.task_name }} </li>
-                    <p> date Created: {{ task.date_created }} </p>
-                {% endfor %}
+                <li class="task {{ complete_class }}">{{ task.task_name }}</li>
+                    {% if task.due_date %}
+                        <p>due by: {{ task.due_date }}</p>
+                    {% endif %}
+                {% endfor %} 
             {% endif %}
         </ul>
-        <form method="POST" action="{{ url_for('add_task') }}">
-                <!-- <fieldset class="form-group"> -->
-                <div class="form-group">
-                    <input type="text" name="task-txt">
-                </div>
-                <!-- </fieldset> -->
-                <div class="form-group submit-btn">
-                    <input type="submit">
-                </div>
-            </form>
     </div>
-    
+    <form method="POST" id="add-task" action="{{ url_for('add_task') }}">
+        <div class="row d-flex justify-content-center">
+        <div class="col-5">
+            <div class="form-group">
+            <span class="descriptor">need to add another task?</span>
+            <input type="text" name="task-txt" placeholder="enter task here." />
+            </div>
+        </div>
+        <div class="col-5">
+            <!-- date not supported in Safari or IE 11 or earlier -->
+            <div class="form-group">
+            <span class="descriptor">is there a due date?</span>
+            <input type="date" name="task-due" />
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group submit-btn">
+                <input type="submit"/>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
 {% endblock content %}

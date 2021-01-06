@@ -2,15 +2,16 @@
 body {
   font-family: Quicksand;
   margin: 2%;
+  background-color: white;
 }
 
 h1 {
   font-weight: bold;
+  text-align: center;
 }
 /* li {
   font-size: 2em;
 } */
-
 
 /* CLASS STYLES */
 li.nav-item {
@@ -20,14 +21,27 @@ li.nav-item {
 li.task {
   font-size: 1.5em;
 }
+span.descriptor {
+  text-align: justify;  
+}
+
+.account-img{
+  width: 10%;
+  height: 10%;
+  
+}
+
 .uncompleted {
   color: red;
 }
+
 .completed {
   color: #2F4F4F;
   opacity: 60%;
 }
-
+#add-task div {
+  margin-top: 2%;
+}
 a.navbar-brand {
   font-size: 3em;
   font-weight: bold;

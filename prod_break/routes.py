@@ -1,8 +1,10 @@
 from flask import render_template, url_for, flash, redirect, request
 from prod_break import app, bcrypt, db  # imports from __init__.py
-from prod_break.forms import RegistrationForm, LoginForm
+from prod_break.forms import RegistrationForm, LoginForm, UpdateProfileForm
 from prod_break.models import User, Task
 from flask_login import login_user, current_user, logout_user
+
+from datetime import date
 
 # tasks = [
 #     {"date": "12-21-2020", "task_name": "get groceries", "complete": False},
@@ -50,9 +52,20 @@ def login():
     return render_template("login.html", title="login.", form=form)
 
 
-@app.route("/profile")
+@app.route("/profile", methods=["GET", "POST"])
 def profile():
-    return render_template("profile.html")
+    form = UpdateProfileForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('your account has been updated!', 'success')
+        return redirect(url_for('profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    user_pfp = url_for('static', filename=f'profile_pics/{current_user.image_file}')
+    return render_template("profile.html", user_pfp=user_pfp, form=form)
 
 @app.route("/logout")
 def logout():
@@ -62,9 +75,13 @@ def logout():
 @app.route('/add_task', methods=["GET","POST"])
 def add_task():
     task_input = request.form.get('task-txt')
+    task_due = request.form.get('task-due')
     if task_input == '':
         return redirect(url_for('task'))
-    new_task = Task(task_name = task_input, user_id = current_user.id)
+    if task_due:
+        new_task = Task(task_name = task_input, user_id = current_user.id, due_date = date.fromisoformat(task_due))
+    else:
+        new_task = Task(task_name = task_input, user_id = current_user.id)
     db.session.add(new_task)
     db.session.commit()
     return redirect(url_for('task'))
