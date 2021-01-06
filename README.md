@@ -23,4 +23,4 @@ In a Chrome or Firefox window, you can now navigate to `localhost:5000` to view 
 ![Alt Text](prod_break/static/usage/usage1.png)
 
 ## Acknowledgement
-To begin this project, I referred to [Corey Schafer's](https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g) Python Flask tutorials to refresh my knowledge of Flask and to learn how to integrate SQLAlchemy.
+To begin this project, I referred to [Corey Schafer's](https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g) Python Flask tutorials to refresh my knowledge of Flask and to learn how to integrate SQLAlchemy into this project.
