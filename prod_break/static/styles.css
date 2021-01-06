@@ -21,6 +21,11 @@ li.nav-item {
 li.task {
   font-size: 1.5em;
 }
+
+li.late::marker{
+  content: '\2757 \2757';
+}
+
 span.descriptor {
   text-align: justify;  
 }
@@ -31,8 +36,9 @@ span.descriptor {
   
 }
 
+
 .uncompleted {
-  color: red;
+  color: black;
 }
 
 .completed {

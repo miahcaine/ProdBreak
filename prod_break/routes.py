@@ -36,7 +36,8 @@ def register():
 @app.route("/tasks", methods=["GET", "POST"])
 def task():
     tasks = current_user.user_tasks
-    return render_template("tasks.html", tasks=tasks)
+    cur_date = date.today()
+    return render_template("tasks.html", tasks=tasks, cur_date=cur_date)
 
 
 @app.route("/login", methods=["GET", "POST"])

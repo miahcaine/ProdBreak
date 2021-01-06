@@ -6,14 +6,18 @@
         <ul>
             {% if tasks %} 
                 {% for task in tasks %} 
+                    {% set late_class = "" %}
+                    {% if task.due_date and task.due_date.date() <= cur_date %}
+                        {% set late_class = "late" %}
+                    {% endif %}
                     {% if task.complete %} 
                         {% set complete_class = "completed" %} 
                     {% else %} 
                         {% set complete_class = "uncompleted" %} 
                     {% endif %}
-                <li class="task {{ complete_class }}">{{ task.task_name }}</li>
+                <li class="task {{ complete_class }} {{ late_class }} ">{{ task.task_name }}</li>
                     {% if task.due_date %}
-                        <p>due by: {{ task.due_date }}</p>
+                        <p>due by: {{ task.due_date.date() }}</p>
                     {% endif %}
                 {% endfor %} 
             {% endif %}
