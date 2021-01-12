@@ -91,6 +91,20 @@ def add_task():
     db.session.commit()
     return redirect(url_for('task'))
 
+@app.route('/tasks/delete_task/<int:task_id>', methods=["GET","POST"])
+@login_required
+def delete_task(task_id):
+    # db.session.commit()
+    return redirect(url_for('logout'))
+
+@app.route('/tasks/complete_task/<int:task_id>', methods=["GET","POST"])
+@login_required
+def complete_task(task_id):
+    task = Task.query.get(task_id)
+    task.complete = not task.complete
+    db.session.commit()
+    return redirect(url_for('task'))
+
 @app.route('/profile/change_pfp', methods=["GET","POST"])
 def change_pfp():
     # task_input = request.form.get('task-txt')

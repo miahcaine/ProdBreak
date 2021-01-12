@@ -14,13 +14,16 @@
                         {% set late_class = "late" %}
                     {% endif %}
                     {% if task.complete %} 
-                        {% set complete_class = "completed" %} 
+                        {% set complete_class = "complete" %} 
                     {% else %} 
-                        {% set complete_class = "uncompleted" %} 
+                        {% set complete_class = "incomplete" %} 
                     {% endif %}
-                <li class="task {{ complete_class }} {{ late_class }} ">{{ task.task_name }}</li>
+                <li class="task {{ complete_class }} {{ late_class }} "> {{ task.task_name }}
+                    <a class="delete-task btn btn-sm" href="{{ url_for('delete_task', task_id=task.id) }}"></a>
+                    <a class="{{ complete_class }}-task btn btn-sm" href="{{ url_for('complete_task', task_id=task.id)}}"></a>
+                </li>
                     {% if task.due_date %}
-                        <p class="due-date {{ late_class }}">due by: {{ task.due_date.strftime("%m-%d-%Y") }}</p>
+                        <p class= "due-date {{ late_class }} {{ complete_class }}">due by: {{ task.due_date.strftime("%m-%d-%Y") }}</p>
                     {% endif %}
                 {% endfor %} 
             {% endif %}

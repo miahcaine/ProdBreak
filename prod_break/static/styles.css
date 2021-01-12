@@ -42,6 +42,25 @@ span.descriptor {
   height: 10vh;
 }
 
+
+button.delete-task, button.complete-task {
+  border: none;
+  width: .75em;
+  height: .75em;
+}
+
+.delete-task {
+  background-color: #DB4C46;
+}
+
+.complete-task {
+  background-color: #38DBB8;
+}
+
+.incomplete-task {
+  background-color: #DBBF68;
+}
+
 .pfp-select-row img{
   width: 5vh;
   height: 5vh;
@@ -57,7 +76,7 @@ span.descriptor {
   color: black;
 } */
 
-.completed {
+.complete {
   color: #2F4F4F;
   opacity: 60%;
 }
