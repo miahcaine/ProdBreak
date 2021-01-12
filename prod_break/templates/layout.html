@@ -30,12 +30,14 @@
                     <ul class="navbar-nav">
                         {% if current_user.is_authenticated %}
                             {% set class_name = '' %}
+                            {% set class_span = '' %}
                             {% set disabled_bool = 'false' %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url_for('logout') }}">logout.</a>
                             </li>
                         {% else %}
                             {% set class_name = 'disabled' %}
+                            {% set class_span = 'da' %}
                             {% set disabled_bool = 'true' %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url_for('register') }}">register.</a>
@@ -45,10 +47,14 @@
                             </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link {{ class_name }}" href="{{ url_for('task') }}" aria-disabled="{{ disabled_bool }}">tasks.</a>
+                            <span class="{{ class_span }}" data-toggle="tooltip" data-placement="bottom" title="you must be logged in to access this.">
+                                <a class="nav-link {{ class_name }}" href="{{ url_for('task') }}" aria-disabled="{{ disabled_bool }}">tasks.</a>
+                            </span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ class_name }}" href="{{ url_for('profile') }}" aria-disabled="{{ disabled_bool }}">your profile.</a>
+                            <span class="{{ class_span }}" data-toggle="tooltip" data-placement="bottom" title="you must be logged in to access this.">
+                                <a class="nav-link {{ class_name }}" href="{{ url_for('profile') }}" aria-disabled="{{ disabled_bool }}">your profile.</a>
+                            </span>
                         </li>
                     </ul>
                 </div>

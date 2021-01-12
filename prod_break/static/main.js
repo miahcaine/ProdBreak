@@ -7,3 +7,11 @@ $(".task").mouseover(function (){
 $(".task").mouseout(function (){
     $(this).find("a").css("visibility", "hidden");
 });
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
