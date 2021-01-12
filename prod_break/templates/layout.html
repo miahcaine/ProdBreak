@@ -32,12 +32,14 @@
                             {% set class_name = '' %}
                             {% set class_span = '' %}
                             {% set disabled_bool = 'false' %}
+                            {% set login_message = "" %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url_for('logout') }}">logout.</a>
                             </li>
                         {% else %}
                             {% set class_name = 'disabled' %}
-                            {% set class_span = 'da' %}
+                            {% set class_span = 'tooltip' %}
+                            {% set login_message = "you must be logged in to access this." %}
                             {% set disabled_bool = 'true' %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url_for('register') }}">register.</a>
@@ -47,12 +49,12 @@
                             </li>
                         {% endif %}
                         <li class="nav-item">
-                            <span class="{{ class_span }}" data-toggle="tooltip" data-placement="bottom" title="you must be logged in to access this.">
+                            <span data-toggle="{{ class_span }}" data-placement="bottom" title="{{ login_message }}">
                                 <a class="nav-link {{ class_name }}" href="{{ url_for('task') }}" aria-disabled="{{ disabled_bool }}">tasks.</a>
                             </span>
                         </li>
                         <li class="nav-item">
-                            <span class="{{ class_span }}" data-toggle="tooltip" data-placement="bottom" title="you must be logged in to access this.">
+                            <span data-toggle="{{ class_span }}" data-placement="bottom" title="{{ login_message }}">
                                 <a class="nav-link {{ class_name }}" href="{{ url_for('profile') }}" aria-disabled="{{ disabled_bool }}">your profile.</a>
                             </span>
                         </li>
