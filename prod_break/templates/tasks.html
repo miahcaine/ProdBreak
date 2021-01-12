@@ -59,7 +59,7 @@
             </div>
         </div>
     </form>
-    {% if current_user.daily_completed_tasks % current_user.break_amt == 0 %}
+    {% if current_user.daily_completed_tasks > 0 and current_user.daily_completed_tasks % current_user.break_amt == 0 %}
         {% set plural = "s" %}
         {% if current_user.daily_completed_tasks / current_user.break_amt == 1 %}
             {% set plural = "" %}
