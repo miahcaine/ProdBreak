@@ -4,13 +4,14 @@ from prod_break.forms import RegistrationForm, LoginForm, UpdateProfileForm
 from prod_break.models import User, Task
 from flask_login import login_user, current_user, logout_user, login_required
 
-from datetime import date
+from datetime import date, timedelta
 
 @app.route("/")
 def home():
     if current_user.is_authenticated:
         return redirect(url_for('task'))
     return render_template("home.html", title="home.")
+    # return render_template("register.html", title="register.")
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
@@ -30,7 +31,12 @@ def register():
 @login_required
 def task():
     tasks = current_user.user_tasks
-    cur_date = date.today()
+    cur_date = date.today() + timedelta(days = 1)
+    if cur_date > current_user.last_task_completed.date():
+        current_user.daily_completed_tasks = 0
+    for task in tasks:
+        if task.date_completed and cur_date > task.date_completed.date():
+            delete_task(task.id, True)
     return render_template("tasks.html", title=f"{current_user.username}'s tasks.", tasks=tasks, cur_date=cur_date)
 
 
@@ -84,35 +90,36 @@ def add_task():
     db.session.commit()
     return redirect(url_for('task'))
 
-@app.route('/tasks/delete_task/<int:task_id>', methods=["GET","POST"])
+@app.route('/tasks/delete_task/<int:task_id>/<int:new_day>', methods=["GET","POST"])
 @login_required
-def delete_task(task_id):
+def delete_task(task_id, new_day):
     task = Task.query.get(task_id)
     if not task or task.user_id != current_user.id:
-        abort(403)
+        flash("this task is not available for you to delete.", "danger")
+        return redirect(url_for('task'))
     db.session.delete(task)
     db.session.commit()
+    # if not new_day:
     return redirect(url_for('task'))
 
 @app.route('/tasks/complete_task/<int:task_id>', methods=["GET","POST"])
 @login_required
 def complete_task(task_id):
     task = Task.query.get(task_id)
-    # add check to make sure it is a user task
+    if not task or task.user_id != current_user.id:
+        flash("this task is not available for you to complete.", "danger")
+        return redirect(url_for('task'))
     task.complete = not task.complete
+    task.date_completed = date.today()
+    current_user.last_task_completed = date.today()
+    if task.complete:
+        current_user.daily_completed_tasks += 1
+    else:
+        current_user.daily_completed_tasks -= 1
     db.session.commit()
     return redirect(url_for('task'))
 
-@app.route('/profile/change_pfp', methods=["GET","POST"])
+@app.route('/profile/change_pfp/<string:new_pfp>', methods=["GET","POST"])
 def change_pfp():
-    # task_input = request.form.get('task-txt')
-    # task_due = request.form.get('task-due')
-    # if task_input == '':
-    #     return redirect(url_for('task'))
-    # if task_due:
-    #     new_task = Task(task_name = task_input, user_id = current_user.id, due_date = date.fromisoformat(task_due))
-    # else:
-    #     new_task = Task(task_name = task_input, user_id = current_user.id)
-    # db.session.add(new_task)
     db.session.commit()
     return redirect(url_for('profile'))

@@ -4,7 +4,10 @@
 {% endblock title %}
 {% block content %}
 <div class="container-fluid">
-    <h1>hi {{ current_user.username }}! here are your current tasks:</h1>    
+    <h1>hi {{ current_user.username }}! here are your current tasks:</h1> 
+    {% if current_user.daily_completed_tasks > 0 %}
+        <h3>you've completed {{ current_user.daily_completed_tasks }} tasks today!</h3> 
+    {% endif %}   
     <div class="d-flex justify-content-center">
         <ul>
             {% if tasks %} 
@@ -21,7 +24,7 @@
                     {% endif %}
                 <li class="task {{ complete_class }} {{ late_class }} "> {{ task.task_name }}
                     <a class="{{ complete_class }}-task btn btn-sm" href="{{ url_for('complete_task', task_id=task.id)}}"></a>
-                    <a class="delete-task btn btn-sm" href="{{ url_for('delete_task', task_id=task.id) }}"></a>
+                    <a class="delete-task btn btn-sm" href="{{ url_for('delete_task', task_id=task.id, new_day=False) }}"></a>
                 </li>
                     {% if task.due_date %}
                         <p class= "due-date {{ late_class }} {{ complete_class }}">due by: {{ task.due_date.strftime("%m-%d-%Y") }}</p>

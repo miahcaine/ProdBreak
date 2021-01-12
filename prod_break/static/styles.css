@@ -8,6 +8,11 @@ h1 {
   font-weight: bold;
   text-align: center;
 }
+
+h3 {
+  text-align: center;
+  font-weight: lighter;
+}
 /* CLASS STYLES */
 li.nav-item {
   font-size: 2em;
