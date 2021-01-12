@@ -94,13 +94,17 @@ def add_task():
 @app.route('/tasks/delete_task/<int:task_id>', methods=["GET","POST"])
 @login_required
 def delete_task(task_id):
-    # db.session.commit()
-    return redirect(url_for('logout'))
+    task = Task.query.get(task_id)
+    # add check to make sure it is a user task
+    db.session.delete(task)
+    db.session.commit()
+    return redirect(url_for('task'))
 
 @app.route('/tasks/complete_task/<int:task_id>', methods=["GET","POST"])
 @login_required
 def complete_task(task_id):
     task = Task.query.get(task_id)
+    # add check to make sure it is a user task
     task.complete = not task.complete
     db.session.commit()
     return redirect(url_for('task'))

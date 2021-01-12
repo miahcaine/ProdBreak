@@ -15,6 +15,7 @@
                     {% endif %}
                     {% if task.complete %} 
                         {% set complete_class = "complete" %} 
+                        {% set late_class = "" %} 
                     {% else %} 
                         {% set complete_class = "incomplete" %} 
                     {% endif %}
@@ -46,7 +47,7 @@
         </div>
         <div class="col-2">
             <div class="form-group submit-btn">
-                <input type="submit"/>
+                <input type="submit" value="add task."/>
             </div>
         </div>
     </div>
