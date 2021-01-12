@@ -59,6 +59,18 @@ span.descriptor {
   background-color: #38DBB8;
 }
 
+.goal-complete {
+  text-align: center;
+  color: rgb(78, 153, 3);
+  font-style: italic;
+  padding-top: 2%;
+}
+
+.goal-complete h4:first-child{
+  font-weight: bold;
+  font-style: normal;
+}
+
 .pfp-select-row img{
   width: 5vh;
   height: 5vh;

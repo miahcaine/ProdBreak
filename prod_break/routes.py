@@ -36,7 +36,7 @@ def task():
         current_user.daily_completed_tasks = 0
     for task in tasks:
         if task.date_completed and cur_date > task.date_completed.date():
-            delete_task(task.id, True)
+            delete_task(task.id)
     return render_template("tasks.html", title=f"{current_user.username}'s tasks.", tasks=tasks, cur_date=cur_date)
 
 
@@ -90,9 +90,9 @@ def add_task():
     db.session.commit()
     return redirect(url_for('task'))
 
-@app.route('/tasks/delete_task/<int:task_id>/<int:new_day>', methods=["GET","POST"])
+@app.route('/tasks/delete_task/<int:task_id>', methods=["GET","POST"])
 @login_required
-def delete_task(task_id, new_day):
+def delete_task(task_id):
     task = Task.query.get(task_id)
     if not task or task.user_id != current_user.id:
         flash("this task is not available for you to delete.", "danger")

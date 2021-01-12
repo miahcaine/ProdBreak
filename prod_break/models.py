@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):  # inherits from database model and session man
     daily_completed_tasks = db.Column(db.Integer, nullable=False, default=0)
     total_completed_tasks = db.Column(db.Integer, nullable=False, default=0)
     last_task_completed = db.Column(db.DateTime, nullable=False, default=date.today())
+    break_amt = db.Column(db.Integer, nullable=False, default=3)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"

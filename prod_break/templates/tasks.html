@@ -4,7 +4,7 @@
 {% endblock title %}
 {% block content %}
 <div class="container-fluid">
-    <h1>hi {{ current_user.username }}! here are your current tasks:</h1> 
+    <h1 class="task-greeting">hi {{ current_user.username }}! here are your current tasks:</h1> 
     {% if current_user.daily_completed_tasks > 0 %}
         {% if current_user.daily_completed_tasks == 1 %}
             <h3>you've completed {{ current_user.daily_completed_tasks }} task today!</h3> 
@@ -28,7 +28,7 @@
                     {% endif %}
                 <li class="task {{ complete_class }} {{ late_class }} "> {{ task.task_name }}
                     <a class="{{ complete_class }}-task btn btn-sm" href="{{ url_for('complete_task', task_id=task.id)}}"></a>
-                    <a class="delete-task btn btn-sm" href="{{ url_for('delete_task', task_id=task.id, new_day=False) }}"></a>
+                    <a class="delete-task btn btn-sm" href="{{ url_for('delete_task', task_id=task.id) }}"></a>
                 </li>
                     {% if task.due_date %}
                         <p class= "due-date {{ late_class }} {{ complete_class }}">due by: {{ task.due_date.strftime("%m-%d-%Y") }}</p>
@@ -39,26 +39,36 @@
     </div>
     <form method="POST" id="add-task" action="{{ url_for('add_task') }}">
         <div class="row d-flex justify-content-center">
-        <div class="col-5">
-            <div class="form-group">
-            <span class="descriptor">need to add another task?</span>
-            <input type="text" name="task-txt" placeholder="enter task here." />
+            <div class="col-5">
+                <div class="form-group">
+                <span class="descriptor">need to add another task?</span>
+                <input type="text" name="task-txt" placeholder="enter task here." />
+                </div>
+            </div>
+            <div class="col-5">
+                <!-- date not supported in Safari or IE 11 or earlier -->
+                <div class="form-group">
+                <span class="descriptor">is there a due date?</span>
+                <input type="date" name="task-due" />
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group submit-btn">
+                    <input type="submit" value="add task."/>
+                </div>
             </div>
         </div>
-        <div class="col-5">
-            <!-- date not supported in Safari or IE 11 or earlier -->
-            <div class="form-group">
-            <span class="descriptor">is there a due date?</span>
-            <input type="date" name="task-due" />
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="form-group submit-btn">
-                <input type="submit" value="add task."/>
-            </div>
-        </div>
-    </div>
     </form>
+    {% if current_user.daily_completed_tasks % current_user.break_amt == 0 %}
+        {% set plural = "s" %}
+        {% if current_user.daily_completed_tasks / current_user.break_amt == 1 %}
+            {% set plural = "" %}
+        {% endif %}
+        <div class="goal-complete">
+            <h4> great job, you've completed your daily task goal {{ (current_user.daily_completed_tasks / current_user.break_amt)|int }} time{{ plural }}! </h4>
+            <h4> give your mind a break before you get back to work :D </h4>
+        </div>
+    {% endif %}
 </div>
 
 {% endblock content %}
