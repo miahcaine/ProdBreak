@@ -6,7 +6,11 @@
 <div class="container-fluid">
     <h1>hi {{ current_user.username }}! here are your current tasks:</h1> 
     {% if current_user.daily_completed_tasks > 0 %}
-        <h3>you've completed {{ current_user.daily_completed_tasks }} tasks today!</h3> 
+        {% if current_user.daily_completed_tasks == 1 %}
+            <h3>you've completed {{ current_user.daily_completed_tasks }} task today!</h3> 
+        {% else %}
+            <h3>you've completed {{ current_user.daily_completed_tasks }} tasks today!</h3>
+        {% endif %}   
     {% endif %}   
     <div class="d-flex justify-content-center">
         <ul>

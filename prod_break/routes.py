@@ -31,7 +31,7 @@ def register():
 @login_required
 def task():
     tasks = current_user.user_tasks
-    cur_date = date.today() + timedelta(days = 1)
+    cur_date = date.today()
     if cur_date > current_user.last_task_completed.date():
         current_user.daily_completed_tasks = 0
     for task in tasks:
