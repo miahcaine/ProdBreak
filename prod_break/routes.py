@@ -60,12 +60,14 @@ def profile():
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.break_amt = form.break_amt.data
         db.session.commit()
         flash('your account has been updated!', 'success')
         return redirect(url_for('profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.break_amt.data = current_user.break_amt 
     user_pfp = url_for('static', filename=f'profile_pics/{current_user.image_file}')
     return render_template("profile.html", title=f"{current_user.username}'s profile.", user_pfp=user_pfp, form=form)
 

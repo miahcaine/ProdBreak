@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField
 import email_validator
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, NumberRange
 
 from prod_break.models import User
 from prod_break import bcrypt
@@ -33,6 +33,7 @@ class LoginForm(FlaskForm):
 class UpdateProfileForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('email', validators=[DataRequired(), Email()])
+    break_amt = IntegerField('task goal', validators=[DataRequired(), NumberRange(min=1, max=None)])
     submit = SubmitField('update profile')
 
     def validate_username(self, username):

@@ -52,6 +52,20 @@
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+
+                <div class="form-group">
+                    {{ form.break_amt.label(class="form-control-label") }}
+                    {% if form.break_amt.errors %}
+                        {{ form.break_amt(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.break_amt.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.break_amt(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
             </fieldset>
             <div class="form-group submit-btn">
                 {{ form.submit(class="btn btn-outline-info") }}
