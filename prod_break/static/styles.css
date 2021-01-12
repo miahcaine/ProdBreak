@@ -2,17 +2,12 @@
 body {
   font-family: Quicksand;
   margin: 2%;
-  background-color: white;
 }
 
 h1 {
   font-weight: bold;
   text-align: center;
 }
-/* li {
-  font-size: 2em;
-} */
-
 /* CLASS STYLES */
 li.nav-item {
   font-size: 2em;
@@ -20,6 +15,11 @@ li.nav-item {
 
 li.task {
   font-size: 1.5em;
+}
+
+.late {
+  font-weight: bold;
+  color: rgb(100, 15, 1);
 }
 
 li.late::marker{
@@ -30,16 +30,32 @@ span.descriptor {
   text-align: justify;  
 }
 
-.account-img{
-  width: 10%;
-  height: 10%;
-  
+.due-date{
+  margin: 0%;
 }
 
+.main-pfp {
+  margin-top: 2vh;
+}
+.account-img{
+  width: 10vh;
+  height: 10vh;
+}
 
+.pfp-select-row img{
+  width: 5vh;
+  height: 5vh;
+  margin-right: 2vh;
+}
+
+.pfp-select-row {
+  background-color: rgb(223, 210, 194);
+  margin-bottom: 2vh;
+}
+/* 
 .uncompleted {
   color: black;
-}
+} */
 
 .completed {
   color: #2F4F4F;

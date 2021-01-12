@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from prod_break import app, bcrypt, db  # imports from __init__.py
 from prod_break.forms import RegistrationForm, LoginForm, UpdateProfileForm
 from prod_break.models import User, Task
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 from datetime import date
 
@@ -17,7 +17,7 @@ from datetime import date
 def home():
     if current_user.is_authenticated:
         return redirect(url_for('task'))
-    return render_template("home.html")
+    return render_template("home.html", title="home.")
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
@@ -34,10 +34,11 @@ def register():
 
 
 @app.route("/tasks", methods=["GET", "POST"])
+@login_required
 def task():
     tasks = current_user.user_tasks
     cur_date = date.today()
-    return render_template("tasks.html", tasks=tasks, cur_date=cur_date)
+    return render_template("tasks.html", title=f"{current_user.username}'s tasks.", tasks=tasks, cur_date=cur_date)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -54,6 +55,7 @@ def login():
 
 
 @app.route("/profile", methods=["GET", "POST"])
+@login_required
 def profile():
     form = UpdateProfileForm()
     if form.validate_on_submit():
@@ -66,14 +68,16 @@ def profile():
         form.username.data = current_user.username
         form.email.data = current_user.email
     user_pfp = url_for('static', filename=f'profile_pics/{current_user.image_file}')
-    return render_template("profile.html", user_pfp=user_pfp, form=form)
+    return render_template("profile.html", title=f"{current_user.username}'s profile.", user_pfp=user_pfp, form=form)
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/add_task', methods=["GET","POST"])
+@app.route('/tasks/add_task', methods=["GET","POST"])
+@login_required
 def add_task():
     task_input = request.form.get('task-txt')
     task_due = request.form.get('task-due')
@@ -86,3 +90,17 @@ def add_task():
     db.session.add(new_task)
     db.session.commit()
     return redirect(url_for('task'))
+
+@app.route('/profile/change_pfp', methods=["GET","POST"])
+def change_pfp():
+    # task_input = request.form.get('task-txt')
+    # task_due = request.form.get('task-due')
+    # if task_input == '':
+    #     return redirect(url_for('task'))
+    # if task_due:
+    #     new_task = Task(task_name = task_input, user_id = current_user.id, due_date = date.fromisoformat(task_due))
+    # else:
+    #     new_task = Task(task_name = task_input, user_id = current_user.id)
+    # db.session.add(new_task)
+    db.session.commit()
+    return redirect(url_for('profile'))

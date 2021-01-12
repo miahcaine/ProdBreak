@@ -1,10 +1,22 @@
 {% extends "layout.html" %}
-
+{% block title %} 
+    <title>prodBreak: {{ title }}</title>
+{% endblock title %}
 {% block content %}
     <h1>hi {{ current_user.username }}! you can change your profile below.</h1>
-    <div class="media">
-        <img class="rounded-circle account-img" src="{{ user_pfp }}"/>
-        <div class="media-body">
+    <div class="row">
+        <div class="col-2 main-pfp">
+            <img class="rounded-circle account-img" src="{{ user_pfp }}"/>
+        </div>
+        <div class="col-10">
+            <div class="pfp-select-row">
+                <img class="rounded-circle account-img" src="{{ user_pfp }}"/>
+                <img class="rounded-circle account-img" src="{{ user_pfp }}"/>
+            </div>
+            <div class="pfp-select-row">
+                <img class="rounded-circle account-img" src="{{ user_pfp }}"/>
+                <img class="rounded-circle account-img" src="{{ user_pfp }}"/>
+            </div>
         </div>
     </div>
     <div>
