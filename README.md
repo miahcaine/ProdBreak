@@ -22,5 +22,8 @@ $ python3 run.py
 In a Chrome or Firefox window, you can now navigate to `localhost:5000` to view the home page of the application.
 ![Alt Text](prod_break/static/usage/usage1.png)
 
+## Roadmap
+In the near future I plan on creating different profile pictures for the user to choose from, an option for them to add their own profile picture, and a password recovery feature, using the user's inputted email.
+
 ## Acknowledgement
 To begin this project, I referred to [Corey Schafer's](https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g) Python Flask tutorials to refresh my knowledge of Flask and to learn how to integrate SQLAlchemy into this project.

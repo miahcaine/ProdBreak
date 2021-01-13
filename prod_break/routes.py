@@ -7,11 +7,11 @@ from flask_login import login_user, current_user, logout_user, login_required
 from datetime import date, timedelta
 
 @app.route("/")
-def home():
-    if current_user.is_authenticated:
-        return redirect(url_for('task'))
-    return render_template("home.html", title="home.")
-    # return render_template("register.html", title="register.")
+## When more features are added, home page will be more developed
+# def home():
+#     if current_user.is_authenticated:
+#         return redirect(url_for('task'))
+#     return render_template("home.html", title="home.")
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
